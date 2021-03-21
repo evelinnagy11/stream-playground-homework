@@ -97,7 +97,8 @@ ed by the language code "es").
      * Prints all distinct language tags of country name translations sorted in alphabetical order.
      */
     public void streamPipeline11() {
-        //countries.stream().flatMap(countries -> countries.stream()).forEach(System.out::println);
+        countries.stream()
+                .flatMap(countries -> countries.getTranslations().keySet().stream()).distinct().sorted().forEach(System.out::println);
     }
 
     /**
@@ -134,7 +135,9 @@ ed by the language code "es").
      */
     public void streamPipeline16() {
 
-        //countries.stream().
+        countries.stream()
+                .filter(country -> country.getRegion() == Region.EUROPE || country.getRegion() == Region.ASIA)
+                .flatMap(countries -> countries.getTimezones().stream()).distinct().forEach(System.out::println);
     }
 
 }
